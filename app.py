@@ -1,3 +1,4 @@
+#This is the flask server, referenced in the Docker file for Google Cloud Run
 from flask import Flask
 
 app = Flask(__name__)
