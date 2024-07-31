@@ -21,14 +21,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+            apt-get update
+            apt-get install -y make
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
 
       - name: Verify dependencies
         run: pip list
-
-      - name: Set up Make
-        run: apt-get install -y make
 
       - name: Run make all
         run: make all
