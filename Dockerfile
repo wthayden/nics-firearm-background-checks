@@ -19,5 +19,5 @@ EXPOSE 8080
 # Define environment variable using the correct format
 ENV PORT=8080
 
-# Run make command and then start a simple HTTP server
-CMD ["sh", "-c", "make all && python3 -m http.server $PORT"]
+# Run make command and then start the Flask server
+CMD ["sh", "-c", "make all && python3 app.py"]
