@@ -1,0 +1,5 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/power-bi-272415/myapp', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['run', 'gcr.io/power-bi-272415/myapp']

@@ -13,11 +13,17 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Install make and wget
 RUN apt-get update && apt-get install -y make wget
 
+# Run make command and exit
+CMD ["make", "all"]
+
 # Expose port 8080
-EXPOSE 8080
+#EXPOSE 8080
 
 # Define environment variable using the correct format
-ENV PORT=8080
+#ENV PORT=8080
 
 # Run make command and then start the Flask server
-CMD ["sh", "-c", "make all && python3 app.py"]
+#CMD ["sh", "-c", "make all && python3 app.py"]
+
+# Run make command and then start the Python server
+#CMD ["sh", "-c", "make all && python3 -m http.server $PORT"]
