@@ -10,14 +10,14 @@ COPY . /app
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install make and other dependencies if not already present
-RUN apt-get update && apt-get install -y make
+# Install make and wget
+RUN apt-get update && apt-get install -y make wget
 
-# Make port 8080 available to the world outside this container
+# Expose port 8080
 EXPOSE 8080
 
-# Define environment variable
-ENV PORT 8080
+# Define environment variable using the correct format
+ENV PORT=8080
 
-# Run make command and then start a simple web server
+# Run make command and then start a simple HTTP server
 CMD ["sh", "-c", "make all && python3 -m http.server $PORT"]
