@@ -10,5 +10,11 @@ COPY . /app
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install make and other dependencies if not already present
+RUN apt-get update && apt-get install -y make
+
+# Make port 8080 available to the world outside this container
+EXPOSE 8080
+
 # Run the makefile command
 CMD ["make", "makeall"]
