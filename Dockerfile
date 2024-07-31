@@ -16,5 +16,8 @@ RUN apt-get update && apt-get install -y make
 # Make port 8080 available to the world outside this container
 EXPOSE 8080
 
-# Run the makefile command
-CMD ["make", "makeall"]
+# Define environment variable
+ENV PORT 8080
+
+# Run make command and then start a simple web server
+CMD ["sh", "-c", "make all && python3 -m http.server $PORT"]
