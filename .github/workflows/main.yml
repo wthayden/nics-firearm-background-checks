@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
             apt-get update
-            apt-get install -y make wget
+            apt-get install -y make wget git
             python -m pip install --upgrade pip
             pip install -r requirements.txt
 
