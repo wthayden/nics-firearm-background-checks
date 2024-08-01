@@ -3,7 +3,7 @@ name: Scheduled NICS Update
 on:
   schedule:
     # Runs every day at 00:00 UTC
-    - cron: '0 2 10,15,20 * *'
+    - cron: '0 2 10,17 * *'
   workflow_dispatch:
 
 jobs:
@@ -32,9 +32,10 @@ jobs:
     - name: Run make all
       run: make all
 
-
     - name: Commit and push changes
       run: |
+        current_date=$(date +'%Y.%m.%d')
+        echo "Current date: $current_date" # Debug line to check the date
         git add .
         git commit -m "Update generated files on $current_date"
         git push origin master
