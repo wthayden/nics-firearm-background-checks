@@ -34,6 +34,13 @@ jobs:
       
       - name: Verify repository
         run: ls -la
+      
+      - name: Initialize and configure git
+        run: |
+          git init
+          git remote add origin https://github.com/${{ github.repository }}.git
+          git fetch
+          git checkout $GITHUB_REF
 
       - name: Run make all
         run: make all
