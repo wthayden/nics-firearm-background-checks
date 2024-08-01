@@ -1,4 +1,4 @@
-name: Scheduled Make All
+name: Scheduled NICS Update
 
 on:
   schedule:
