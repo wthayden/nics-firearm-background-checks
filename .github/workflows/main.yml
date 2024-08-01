@@ -26,6 +26,9 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
 
+      - name: Verify git installation
+        run: git --version
+
       - name: Verify dependencies
         run: pip list
 
