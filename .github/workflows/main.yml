@@ -38,6 +38,7 @@ jobs:
       - name: Initialize and configure git
         run: |
           git init
+          git config --global --add safe.directory /__w/nics-firearm-background-checks/nics-firearm-background-checks
           git remote add origin https://github.com/${{ github.repository }}.git
           git fetch
           git checkout $GITHUB_REF
