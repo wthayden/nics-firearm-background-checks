@@ -7,53 +7,35 @@ on:
   workflow_dispatch:
 
 jobs:
-  Update-data:
+  build:
     runs-on: ubuntu-latest
 
-    container:
-     image: python:3.9-slim
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.HAYDEN_TOKEN }}
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: |
-            apt-get update
-            apt-get install -y make wget git
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.10
 
-      - name: Verify git installation
-        run: git --version
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
-      - name: Verify dependencies
-        run: pip list
-      
-      - name: Verify repository
-        run: ls -la
-      
-      - name: Initialize and configure git
-        run: |
-          git init
-          git config --global --add safe.directory /__w/nics-firearm-background-checks/nics-firearm-background-checks
-          git remote add origin https://github.com/${{ github.repository }}.git
-          git fetch
-          git clean -fdx
-          git reset --hard origin/master
-          git checkout master
+    - name: Run make all
+      run: make all
 
-      - name: Run make all
-        run: make all
+    - name: Configure git
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Update generated files"
-          git push
-        env:
+    - name: Commit and push changes
+      run: |
+        git add .
+        git commit -m "Update generated files"
+        git push origin master
+      env:
           GITHUB_TOKEN: ${{ secrets.HAYDEN_TOKEN }}
